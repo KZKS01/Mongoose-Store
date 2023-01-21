@@ -27,7 +27,9 @@ router.get('/products', (req, res) => {
 })
 
 //New
-
+router.get('/products/new', (req, res) => {
+    res.render('new.ejs');
+})
 
 //Delete
 router.delete('/products/:id', (req, res) => {
@@ -44,6 +46,12 @@ router.put('/products/:id', (req, res) => {
 })
 
 //Create
+router.post('/products', (req, res) => {
+    Product.create(req.body, (err, createdProduct) => {
+        console.log(err);//DEBUG
+        res.redirect('/products');
+    })
+})
 
 //Edit
 router.get('/products/:id/edit', (req, res) => {
