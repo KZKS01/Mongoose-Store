@@ -1,12 +1,13 @@
 //dependencies
 const express = require("express");
 const mongoose = require("mongoose");
+const productsRouter = require('./controllers/product')
 
 //initialize the application
 const app = express();
 
 //configure settings
-require("dotenv").config();
+require("dotenv").config();//connect to my MongoDB Database
 const PORT = process.env.PORT;
 const DATABASE_URL = process.env.DATABASE_URL;
 
@@ -17,3 +18,12 @@ mongoose.connect(DATABASE_URL);
 const db = mongoose.connection;
 db.on("error", (err) => console.log(err.message + " is mongo not running?"));
 db.on("connected", () => console.log("mongo connected"));
+
+//mount middleware
+app.use(express.urlencoded({extended: false}));
+
+//mount routes
+app.use(productsRouter);
+
+//listener
+app.listen(PORT, () => console.log(`Server is listening on port: ${PORT}`));
