@@ -46,6 +46,13 @@ router.put('/products/:id', (req, res) => {
 //Create
 
 //Edit
+router.get('/products/:id/edit', (req, res) => {
+    Product.findById(req.params.id, (err, foundProduct) => {
+        res.render('edit.ejs', {
+            product: foundProduct,
+        })
+    })
+})
 
 //Show
 router.get('/products/:id', (req, res) =>{
