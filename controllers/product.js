@@ -5,6 +5,7 @@ const data = require('../seed-data') //seed data
 //for the controller to access the model
 const Product = require('../models/products');
 
+
 //seed data route
 router.get('/products/seed', (req, res) => {
     //reset database and recreate products
@@ -27,9 +28,20 @@ router.get('/products', (req, res) => {
 
 //New
 
+
 //Delete
+router.delete('/products/:id', (req, res) => {
+    Product.findByIdAndDelete(req.params.id, (err, deletedProduct) => {
+        res.redirect('/products');
+    })
+})
 
 //Update
+router.put('/products/:id', (req, res) => {
+    Product.findByIdAndUpdate(req.params.id, req.body, (err, product) => {
+        res.redirect('/products')
+    })
+})
 
 //Create
 

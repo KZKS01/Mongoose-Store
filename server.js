@@ -2,6 +2,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const productsRouter = require('./controllers/product')
+const methodOverride = require('method-override');
 
 //initialize the application
 const app = express();
@@ -21,6 +22,7 @@ db.on("connected", () => console.log("mongo connected"));
 
 //mount middleware
 app.use(express.urlencoded({extended: false}));
+app.use(methodOverride('_method'));
 
 //mount routes
 app.use(productsRouter);
