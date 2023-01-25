@@ -9,11 +9,11 @@ const Product = require('../models/products');
 //seed data route
 router.get('/products/seed', (req, res) => {
     //reset database and recreate products
-    Product.deleteMany({}, (err, results) => {//empty object will delete everything, unless fill it out with specific criteria
-    //result shows how many objects are deleted
-    Product.create(data, (err, products) => {
-        res.redirect('/products');
-    })
+    Product.deleteMany({}, (err, results) => { //empty object will delete everything, unless fill it out with specific criteria
+        //result shows how many objects are deleted
+        Product.create(data, (err, products) => {
+            res.redirect('/products');
+        })
     })
 })
 
@@ -41,14 +41,26 @@ router.delete('/products/:id', (req, res) => {
 //Update
 router.put('/products/:id', (req, res) => {
     Product.findByIdAndUpdate(req.params.id, req.body, (err, product) => {
-        res.redirect('/products')
+        res.render('show.ejs')
+        //console.log(req.body.qty);
     })
+})
+router.put('/products/:id/buy', (req, res) => {
+    Product.findByIdAndUpdate(req.params.id, {
+            qty: parseInt(req.body.qty) - 1,
+        },
+        (err, product) => {
+            res.render('show.ejs', {
+                product: product,
+            })
+            //console.log(req.body.qty);
+        })
 })
 
 //Create
 router.post('/products', (req, res) => {
     Product.create(req.body, (err, createdProduct) => {
-        console.log(err);//DEBUG
+        console.log(err); //DEBUG
         res.redirect('/products');
     })
 })
@@ -63,12 +75,12 @@ router.get('/products/:id/edit', (req, res) => {
 })
 
 //Show
-router.get('/products/:id', (req, res) =>{
-   Product.findById(req.params.id, (err, foundProduct) => {
-    res.render('show.ejs', {
-        product: foundProduct,
+router.get('/products/:id', (req, res) => {
+    Product.findById(req.params.id, (err, foundProduct) => {
+        res.render('show.ejs', {
+            product: foundProduct,
+        })
     })
-   }) 
 })
 
 module.exports = router; // so that server.js can reference this file

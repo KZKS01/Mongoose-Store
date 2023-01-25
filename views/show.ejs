@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Show Page</title>
 </head>
+
 <body>
     <nav>
         <a href="/products">Back to Products Index</a>
@@ -14,16 +16,22 @@
     <p><b>Description: </b> <%= product.description %> </p>
     <img src="<%= product.img %> " alt="product img">
     <p><b>Price: </b> <%= product.price %> </p>
-    <p><b>Qty: </b> 
+    <p><b>Qty: </b>
         <% if(product.qty > 0) { %>
-            <%= product.qty %> remaining
-       <% } else { %>   
-        <%= "OUT OF STOCK" %> 
-        <% } %> 
-        </p>
+        <%= product.qty %> remaining
+        <% } else { %>
+        <%= "OUT OF STOCK" %>
+        <% } %>
+    </p>
     <a href="/products/<%= product._id %>/edit"><button>EDIT</button></a>
     <form action="/products/<%= product._id %>?_method=Delete" method="POST">
-    <input type="submit" value="DELETE">
+        <input type="submit" value="DELETE"><br>
+    </form>    
+    <form action="/products/<%= product._id %>/buy?_method=PUT" method="POST">
+        <input type="hidden" name="qty" value="<%= product.qty %>">
+    <button>BUY</button>
     </form>
+    
 </body>
+
 </html>
