@@ -1,0 +1,28 @@
+body{
+    display: flex;
+    flex-direction: column;
+    background: rgb(200, 245, 245);
+}
+
+.title{
+    background: rgb(237, 255, 253);
+    border-radius: 5%;
+    text-align: center;
+}
+
+.addBtn{
+    background: rgb(151, 221, 248);
+    border: solid black 1px;
+    position: absolute;
+    right: 0;
+}
+
+.name, img{
+    display: flex;
+    flex-wrap:wrap;
+}
+
+.btns {
+    display: flex;
+    justify-content: flex-start;
+  }

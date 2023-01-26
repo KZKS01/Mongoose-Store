@@ -23,6 +23,7 @@ db.on("connected", () => console.log("mongo connected"));
 //mount middleware
 app.use(express.urlencoded({extended: false}));
 app.use(methodOverride('_method'));
+app.use(express.static('public')); 
 
 //mount routes
 app.use(productsRouter);

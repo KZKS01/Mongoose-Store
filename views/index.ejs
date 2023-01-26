@@ -4,22 +4,23 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
     <title>Mongoose Store Index Page</title>
 </head>
 <body>
     <nav>
-       <a href="/products/new">Add a New Product</a> 
-    </nav>
-    <h1>Product Index Page</h1>
+       <a href="/products/new" class="addBtn">Add a New Product</a> 
+    </nav><br>
+    <h1 class="title">Product Index Page</h1>
     <ul>
         <% productInfo.forEach(productInfo =>{%>
         <li>
             <!-- mongoose object id: _id -->
-        <a href="/products/<%= productInfo._id %>">
+        <a class="name" href="/products/<%= productInfo._id %>">
             <%= productInfo.name %> 
         </a>
         <img src="<%= productInfo.img %> " alt="product img">
-        </li>
+        </li><br><br>
         <% }) %>   
     </ul>
 </body>

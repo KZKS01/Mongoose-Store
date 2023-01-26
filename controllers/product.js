@@ -47,13 +47,12 @@ router.put('/products/:id', (req, res) => {
 })
 router.put('/products/:id/buy', (req, res) => {
     Product.findByIdAndUpdate(req.params.id, {
-            qty: parseInt(req.body.qty) - 1,
+            qty: parseInt(req.body.qty)-1,
         },
         (err, product) => {
             res.render('show.ejs', {
                 product: product,
             })
-            //console.log(req.body.qty);
         })
 })
 

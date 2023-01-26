@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
     <title>Product Show Page</title>
 </head>
 
@@ -12,6 +13,7 @@
     <nav>
         <a href="/products">Back to Products Index</a>
     </nav>
+    <br>
     <h1><%= product.name %> </h1>
     <p><b>Description: </b> <%= product.description %> </p>
     <img src="<%= product.img %> " alt="product img">
@@ -23,15 +25,18 @@
         <%= "OUT OF STOCK" %>
         <% } %>
     </p>
-    <a href="/products/<%= product._id %>/edit"><button>EDIT</button></a>
-    <form action="/products/<%= product._id %>?_method=Delete" method="POST">
-        <input type="submit" value="DELETE"><br>
-    </form>    
-    <form action="/products/<%= product._id %>/buy?_method=PUT" method="POST">
-        <input type="hidden" name="qty" value="<%= product.qty %>">
-    <button>BUY</button>
-    </form>
-    
+    <div class="btns">
+        <a href="/products/<%= product._id %>/edit"><button>EDIT</button></a>
+        <form action="/products/<%= product._id %>?_method=Delete" method="POST">
+            <input type="submit" value="DELETE"><br>
+        </form>
+        <% if(product.qty > 0) {%>
+        <form action="/products/<%= product._id %>/buy?_method=PUT" method="POST">
+            <input type="hidden" name="qty" value="<%= product.qty %>">
+            <button>BUY</button>
+        </form>
+        <% }  %>
+    </div>
 </body>
 
 </html>
